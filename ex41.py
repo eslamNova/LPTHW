@@ -2,7 +2,7 @@ import random
 from urllib.request import urlopen
 import sys
 
-WORD_URL = "http://learncodethehardway.org/word.txt"
+WORD_URL = "http://learncodethehardway.org/words.txt"
 WORDS = []
 PHRASES = {"Class %%%(%%%):":"Make a class named %%% that is-a %%%.", "class %%%(object):\n\tdef __init__(self,***)":"class %%% has-a __init__ that takes self and *** params.", "class %%%(object):\n\tdef ***(self,@@@)":"class %%% has-a function *** that takes self and @@@ params.", "***=%%%()":"set *** to an instance of class %%%.", "***.***(@@@)":"From *** get the *** function, call it with params self, @@@.", "***.*** = '***'":"From *** get the *** attribute and set it to '***'."}
 
@@ -34,18 +34,16 @@ def convert(snippet, phrase):
 		results.append(result)
 	return results
 
-try:
-	while True:
-		snippets = list(PHRASE.keys())
-		random.shuffle(snippets)
-		for snippet in snippets:
-			phrase = PHRASES[snippet]
-			question, answer = convert(snippet, phrase)
-			if PHRASE_FIRST:
-				question, answer = answer, question
-			print(question)
-			input("< ")
-			print(f"ANSWER: {answer}\n\n")
-except EOFErroer:
-	print("\nBye")
+
+while True:
+	snippets = list(PHRASES.keys())
+	random.shuffle(snippets)
+	for snippet in snippets:
+		phrase = PHRASES[snippet]
+		question, answer = convert(snippet, phrase)
+		if PHRASE_FIRST:
+			question, answer = answer, question
+		print(question)
+		input("< ")
+		print(f"ANSWER: {answer}\n\n")
 	
